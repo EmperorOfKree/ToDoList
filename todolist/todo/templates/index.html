@@ -1,0 +1,26 @@
+{% extends 'Base/base.html' %}
+
+{% block content %}
+    <div align="right">
+        <a href="add" class="btn btn-success">Add task</a>
+    </div>
+    <br>
+     <div>
+         {% for todo in todos %}
+        <div class="border border-secondary rounded">
+            <div {% if todo.status %} style="background-color: #B0C4DE;" {% else %} style="background-color:#98FB98;" {% endif %} class=".d-sm-inline-flex p-1">
+                <label class="h5"><strong>{% if todo.delete_date %}<del>{% endif %}{{ todo.title }}{% if todo.delete_date %}</del>{% endif %}</strong></label>
+                <br>
+                <label class="h6" style="word-break: break-all">{% if todo.delete_date %}<del>{% endif %}<strong>Description: </strong>{{ todo.description }}{% if todo.delete_date %}</del>{% endif %}</label>
+                <br>
+                <label><small>{% if todo.delete_date %}<del>{% endif %}Created on {{ todo.create_date }}{% if todo.delete_date %}</del>{% endif %}</small></label>
+                {% if todo.conclusion_date %}<br>{% endif %}
+                {% if todo.conclusion_date %}<label><small>{% if todo.delete_date %}<del>{% endif %}Completed on {{ todo.conclusion_date }}{% if todo.delete_date %}</del>{% endif %}</small></label>{% endif %}
+                {% if todo.delete_date %}{% else %}<a style="float: right; margin:3px;" href="edit/{{ todo.id }}" class="btn btn-primary btn-sm">Edit</a>{% endif %}
+            </div>
+        </div>
+    {% endfor %}
+     </div>
+
+
+{% endblock %}
